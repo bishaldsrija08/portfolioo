@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Bitter:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f1e3;
+      --surface: #fffaf0;
+      --ink: #1f2328;
+      --muted: #5b5f66;
+      --accent: #0b7a75;
+      --accent-alt: #f0a202;
+      --card: #ffffff;
+      --border: #d9cfc1;
+      --shadow: 0 20px 35px rgba(31, 35, 40, 0.08);
+      --radius: 18px;
+      --max-width: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 20%, #ffd8a8 0%, transparent 28%),
+        radial-gradient(circle at 82% 18%, #a9def9 0%, transparent 24%),
+        linear-gradient(160deg, var(--bg), #f5efe0 42%, #f9f3e8 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(247, 241, 227, 0.8);
+      border-bottom: 1px solid rgba(91, 95, 102, 0.12);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 0;
+    }
+
+    .brand {
+      font-family: "Bitter", serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 1.1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 4.5rem 0 2.2rem;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: #ffffffc4;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.84rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin: 0 0 0.7rem;
+    }
+
+    h1 {
+      font-family: "Bitter", serif;
+      font-size: clamp(2rem, 4.2vw, 3.2rem);
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 1.2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      padding: 0.72rem 1rem;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(11, 122, 117, 0.25);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--ink);
+      border-color: var(--border);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+
+    .stat {
+      background: #fffcf7;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.7rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 2.4rem 0;
+    }
+
+    .section-title {
+      font-family: "Bitter", serif;
+      font-size: 1.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.8rem;
+    }
+
+    .chip {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+
+    .project-controls {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .filter-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-family: inherit;
+    }
+
+    .filter-btn.active {
+      background: var(--accent-alt);
+      border-color: #d38c03;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0.8rem 0;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.76rem;
+      color: var(--muted);
+      background: #fffcf7;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .contact ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .contact a:not(.btn) {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 2rem 0 2.5rem;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .about,
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        display: none;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 3.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">Ava<span>Py</span> Dev</div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero fade-in">
+      <div>
+        <div class="pill">Python Developer • Automation, APIs, Data Apps</div>
+        <h1>Building Useful Software With Python</h1>
+        <p>
+          I design and ship clean Python solutions for web services, automation, and data workflows.
+          My focus is practical engineering: fast APIs, clear code, and measurable business impact.
+        </p>
+        <div class="cta-group">
+          <a class="btn btn-primary" href="#projects">See Projects</a>
+          <a class="btn btn-secondary" href="#contact">Let’s Work Together</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <h3>At A Glance</h3>
+        <p>Python developer with a product mindset and strong backend foundations.</p>
+        <div class="quick-stats">
+          <div class="stat">
+            <strong>4+</strong>
+            Years coding Python
+          </div>
+          <div class="stat">
+            <strong>18</strong>
+            Projects delivered
+          </div>
+          <div class="stat">
+            <strong>9</strong>
+            API systems built
+          </div>
+          <div class="stat">
+            <strong>100k+</strong>
+            Records processed/day
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="about" class="fade-in">
+      <h2 class="section-title">About</h2>
+      <div class="about">
+        <article class="panel">
+          <p>
+            I enjoy solving real-world problems with Python, from writing reliable backend services
+            to building data pipelines that save teams hours each week.
+          </p>
+          <p>
+            When I am not coding, I document patterns, mentor junior developers, and contribute to open-source utilities.
+          </p>
+        </article>
+        <article class="panel" id="skills">
+          <h3>Core Skills</h3>
+          <div class="chip-grid">
+            <span class="chip">Python</span>
+            <span class="chip">Django</span>
+            <span class="chip">FastAPI</span>
+            <span class="chip">Flask</span>
+            <span class="chip">Pandas</span>
+            <span class="chip">SQL</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">REST APIs</span>
+            <span class="chip">Docker</span>
+            <span class="chip">GitHub Actions</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="fade-in">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-controls" aria-label="Project filter controls">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="api">API</button>
+        <button class="filter-btn" data-filter="data">Data</button>
+        <button class="filter-btn" data-filter="automation">Automation</button>
+      </div>
+
+      <div class="projects">
+        <article class="project-card" data-category="api">
+          <h3>Inventory API Service</h3>
+          <p>Built a FastAPI microservice with auth, caching, and async endpoints for real-time inventory updates.</p>
+          <div class="tag-row">
+            <span class="tag">FastAPI</span>
+            <span class="tag">Redis</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="data">
+          <h3>Sales Insights Dashboard</h3>
+          <p>Processed monthly sales data and generated trend reports to support regional strategy decisions.</p>
+          <div class="tag-row">
+            <span class="tag">Pandas</span>
+            <span class="tag">Matplotlib</span>
+            <span class="tag">Jupyter</span>
+          </div>
+        </article>
+
+        <article class="project-card" data-category="automation">
+          <h3>Document Automation Bot</h3>
+          <p>Automated repetitive invoice workflows, reducing manual processing time by 70%.</p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Selenium</span>
+            <span class="tag">CSV</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact">
+        <article class="panel">
+          <p>
+            Open to freelance work, backend roles, and collaborative Python projects.
+            Reach out and tell me what you are building.
+          </p>
+          <a class="btn btn-primary" href="mailto:hello@avapy.dev">Send Email</a>
+        </article>
+        <article class="panel">
+          <ul>
+            <li>Email: <a href="mailto:hello@avapy.dev">hello@avapy.dev</a></li>
+            <li>GitHub: <a href="https://github.com" target="_blank" rel="noreferrer">github.com/avapy</a></li>
+            <li>LinkedIn: <a href="https://linkedin.com" target="_blank" rel="noreferrer">linkedin.com/in/avapy</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span id="year"></span> AvaPy Dev. Crafted with HTML, CSS, and JavaScript.
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach((btn) => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const filter = button.dataset.filter;
+        projectCards.forEach((card) => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.style.display = show ? 'block' : 'none';
+        });
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    fadeElements.forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
